@@ -1,3 +1,4 @@
+#include <sys/_types/_int8_t.h>
 #include <cassert>
 #include <fstream>
 #include <iomanip>
@@ -6,6 +7,7 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <map>
 #include <vector>
 
 
@@ -22,7 +24,7 @@ vector<string> read_file_by_lines(const char *path) {
   return result;
 }
 
-vector<string> split(string s, string delimiter) {
+vector<string> split(const string & s, const string & delimiter) {
   size_t pos_start = 0, pos_end, delim_len = delimiter.length();
   string token;
   vector<string> res;
@@ -37,7 +39,7 @@ vector<string> split(string s, string delimiter) {
   return res;
 }
 
-template <typename T> std::ostream &operator<<(std::ostream &os, vector<T> v) {
+template <typename T> std::ostream &operator<<(std::ostream &os, const vector<T> & v) {
   os << "v[";
   for (const auto &el : v) {
     os << el << (&el == &v.back() ? "]" : ", ");
@@ -45,11 +47,20 @@ template <typename T> std::ostream &operator<<(std::ostream &os, vector<T> v) {
   return os;
 }
 
-std::ostream &operator<<(std::ostream &os, vector<string> v) {
+std::ostream &operator<<(std::ostream &os, const vector<string> & v) {
   os << "v[";
   for (const auto &el : v) {
     os << std::quoted(el.substr(0, 50) + (el.size() > 50 ? ".." : ""))
        << (&el == &v.back() ? "]" : ", ");
+  }
+  return os;
+}
+
+template <typename K, typename V> std::ostream &operator<<(std::ostream &os, std::unordered_map<K, V> m) {
+  os << "{";
+  auto i = 0;
+  for (auto &[k , v] : m) {
+    os << k << ": " << v << (++i == m.size() ? "}" : ", ");
   }
   return os;
 }
