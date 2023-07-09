@@ -71,7 +71,7 @@ int part_2(const vector<string> &lines) {
  }
 
 int main() {
-    auto lines        = read_file_by_lines("input/day7.txt");
+    auto lines        = read_file_by_lines("input/day_7.txt");
     auto part1_answer = part_1(lines);
     cout << "Part 1 answer " << part1_answer << "\n";
     auto part2_answer = part_2(lines);

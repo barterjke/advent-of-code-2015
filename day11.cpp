@@ -80,6 +80,6 @@ int main() {
     // assert(part_1("ghijklmn") == "ghjaabcc");
     auto part1_answer = part_1("cqjxjnds");
     cout << "Part 1 answer " << part1_answer << "\n";
-    cout << "Part 1 answer " << part_1(part1_answer, 1) << "\n";
+    cout << "Part 2 answer " << part_1(part1_answer, 1) << "\n";
     return 0;
 }

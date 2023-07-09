@@ -1,17 +1,12 @@
 #include "header.hpp"
-#include <_types/_uint32_t.h>
-#include <cassert>
-#include <limits>
-#include <unordered_set>
-#include <vector>
 
-unordered_set<string> distinct_locations;
+std::unordered_set<string> distinct_locations;
 
 int get_index(const string &s) {
     return std::distance(distinct_locations.begin(), distinct_locations.find(s));
 }
 
-void combinations(int length, vector<int> &pos, vector<vector<int>> &result, int n) {
+void get_combinations_recursive(int length, vector<int> &pos, vector<vector<int>> &result, int n) {
     if (n == length) {
         result.push_back(pos);
         return;
@@ -26,7 +21,7 @@ void combinations(int length, vector<int> &pos, vector<vector<int>> &result, int
         }
         if (!skip) {
             pos[n] = i;
-            combinations(length, pos, result, n + 1);
+            get_combinations_recursive(length, pos, result, n + 1);
         }
     }
 }
@@ -49,7 +44,7 @@ Vec2 part_1(const vector<string> &lines) {
     }
     vector<int> pos(distinct_locations.size(), 0);
     vector<vector<int>> result;
-    combinations(pos.size(), pos, result, 0);
+    get_combinations_recursive(pos.size(), pos, result, 0);
     auto min_distance = std::numeric_limits<int>::max();
     auto max_distance = 0;
     for (auto pos : result) {
@@ -69,10 +64,10 @@ int part_2(const vector<string> &lines) {
 }
 
 int main() {
-    auto test_answer = part_1(read_file_by_lines("input/day9.0.txt"));
+    auto test_answer = part_1(read_file_by_lines("input/day_9_0.txt"));
     assert(test_answer.x == 605 && test_answer.y == 982);
     distinct_locations.clear();
-    auto lines        = read_file_by_lines("input/day9.txt");
+    auto lines        = read_file_by_lines("input/day_9.txt");
     auto part1_answer = part_1(lines);
     cout << "Part 1 answer " << part1_answer.x << "\n";
     cout << "Part 2 answer " << part1_answer.y << "\n";

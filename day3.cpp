@@ -3,7 +3,7 @@
 int part_1(const vector<string> &lines) {
     Vec2 position = {0, 0};
     assert(lines.size() == 1);
-    unordered_set<Vec2, Vec2::HashFunction> visited = {position};
+    std::unordered_set<Vec2, Vec2::HashFunction> visited = {position};
     for (char c : lines[0]) {
         switch (c) {
         case '<':
@@ -27,7 +27,7 @@ int part_1(const vector<string> &lines) {
 int part_2(const vector<string> &lines) {
     Vec2 position_1 = {0, 0}, position_2 = {0, 0};
     assert(lines.size() == 1);
-    unordered_set<Vec2, Vec2::HashFunction> visited = {position_1};
+    std::unordered_set<Vec2, Vec2::HashFunction> visited = {position_1};
     bool turn                                       = true;
     for (char c : lines[0]) {
         turn           = !turn;
@@ -52,7 +52,7 @@ int part_2(const vector<string> &lines) {
 }
 
 int main() {
-    auto lines = read_file_by_lines("input/day3.txt");
+    auto lines = read_file_by_lines("input/day_3.txt");
     // cout << lines << std::endl;
     cout << "Part 1 answer: " << part_1(lines) << "\n";
     cout << "Part 2 answer: " << part_2(lines) << "\n";

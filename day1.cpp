@@ -19,7 +19,7 @@ int part_2(const vector<string> &lines) {
 }
 
 int main() {
-    auto lines = read_file_by_lines("input/day1.txt");
+    auto lines = read_file_by_lines("input/day_1.txt");
     cout << "Part 1 answer " << part_1(lines) << "\n";
     cout << "Part 2 answer " << part_2(lines) << "\n";
     return 0;

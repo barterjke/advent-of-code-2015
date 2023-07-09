@@ -1,6 +1,6 @@
 #!/bin/bash
-
-flags="-fsanitize=undefined -fsanitize=bounds --std=c++20"
+# flags="-fsanitize=undefined -fsanitize=bounds --std=c++20"
+flags="--std=c++20"
 arg=$1
 file_name="${arg}.cpp"
 target="build/${arg}.exe"

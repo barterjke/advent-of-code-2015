@@ -35,9 +35,10 @@ int part_2(const vector<string> &lines) {
 }
 
 int main() {
-    auto lines = read_file_by_lines("input/day8.txt");
-    assert(part_1(read_file_by_lines("input/day8.0.txt")) == 12);
-    assert(part_2(read_file_by_lines("input/day8.0.txt")) == 19);
+    auto test_lines = read_file_by_lines("input/day_8_0.txt");
+    assert(part_1(test_lines) == 12);
+    assert(part_2(test_lines) == 19);
+    auto lines        = read_file_by_lines("input/day_8.txt");
     auto part1_answer = part_1(lines);
     cout << "Part 1 answer " << part1_answer << "\n";
     auto part2_answer = part_2(lines);

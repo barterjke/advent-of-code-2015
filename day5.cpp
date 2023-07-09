@@ -1,9 +1,7 @@
 #include "header.hpp"
-#include <cassert>
-#include <functional>
 
-const unordered_set<char> vowels      = {'a', 'e', 'i', 'o', 'u'};
-const unordered_set<string> bad_pairs = {"ab", "cd", "pq", "xy"};
+const std::unordered_set<char> vowels      = {'a', 'e', 'i', 'o', 'u'};
+const std::unordered_set<string> bad_pairs = {"ab", "cd", "pq", "xy"};
 
 bool is_nice_1(const string &input) {
     int vowels_counter   = vowels.find(input[0]) != vowels.end();
@@ -64,7 +62,7 @@ int main() {
     assert(is_nice_2("xxyxx"));
     assert(!is_nice_2("uurcxstgmygtbstg"));
     assert(!is_nice_2("ieodomkazucvgmuy"));
-    auto lines = read_file_by_lines("input/day5.txt");
+    auto lines = read_file_by_lines("input/day_5.txt");
     cout << "Part 1 answer: " << part_1(lines, is_nice_1) << "\n";
     cout << "Part 2 answer: " << part_1(lines, is_nice_2) << "\n";
     return 0;

@@ -1,7 +1,4 @@
 #include "header.hpp"
-#include <cassert>
-#include <sys/_types/_int8_t.h>
-#include <sys/_types/_size_t.h>
 
 int part_1(const vector<string> &lines, bool is_part_2 = false) {
     enum cmd { toggle, on, off };
@@ -34,7 +31,7 @@ int part_1(const vector<string> &lines, bool is_part_2 = false) {
 }
 
 int main() {
-    auto lines = read_file_by_lines("input/day6.txt");
+    auto lines = read_file_by_lines("input/day_6.txt");
     cout << "Part 1 answer " << part_1(lines) << "\n";
     cout << "Part 2 answer " << part_1(lines, true) << "\n";
     return 0;
