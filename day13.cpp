@@ -1,7 +1,4 @@
 #include "header.hpp"
-#include <cassert>
-#include <cstddef>
-#include <unordered_map>
 
 void get_combinations_recursive(int length, vector<int> &pos, vector<vector<int>> &result, int n) {
     if (n == length) {
