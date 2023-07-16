@@ -24,6 +24,7 @@ vector<vector<int>> get_combinations(size_t size) {
     vector<int> pos(size, 0);
     vector<vector<int>> result;
     get_combinations_recursive(pos.size(), pos, result, 0);
+    return result;
 }
 
 int calculate_optimal_seating(const vector<string> &lines, bool include_self = false) {
@@ -37,8 +38,6 @@ int calculate_optimal_seating(const vector<string> &lines, bool include_self = f
         int happiness      = stoi(s[3]);
         bool gain          = s[2] == "gain";
         string next_person = s[10].substr(0, s[10].size() - 1);
-        // print(person, next_person, happiness, gain);
-        // print(line, "\n");
         map[{person, next_person}] = (gain ? +1 : -1) * happiness;
         names.insert(person);
     }
