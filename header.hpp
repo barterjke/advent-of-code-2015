@@ -117,27 +117,27 @@ template <class... T> string to_str(const std::tuple<T...> &_tup) {
     return to_str(_tup, std::make_index_sequence<sizeof...(T)>());
 }
 
-template <typename Container>
-// requires(!std::is_same_v<Container, std::vector<bool>>)
-string to_str(const Container &container) {
-    std::stringstream ss;
-    ss << "container(";
-    size_t ind = 0;
-    for (auto element : container) {
-        ss << to_str(element) << (++ind == container.size() ? ')' : ' ');
-    }
-    return ss.str();
-}
+// template <typename Container>
+// // requires(!std::is_same_v<Container, std::vector<bool>>)
+// string to_str(const Container &container) {
+//     std::stringstream ss;
+//     ss << "container(";
+//     size_t ind = 0;
+//     for (auto element : container) {
+//         ss << to_str(element) << (++ind == container.size() ? ')' : ' ');
+//     }
+//     return ss.str();
+// }
 
-string to_str(const std::vector<bool> &container) {
-    std::stringstream ss;
-    ss << "bc(";
-    size_t ind = 0;
-    for (bool value : container) {
-        ss << to_str(value) << (++ind == container.size() ? ')' : ' ');
-    }
-    return ss.str();
-}
+// string to_str(const std::vector<bool> &container) {
+//     std::stringstream ss;
+//     ss << "bc(";
+//     size_t ind = 0;
+//     for (bool value : container) {
+//         ss << to_str(value) << (++ind == container.size() ? ')' : ' ');
+//     }
+//     return ss.str();
+// }
 
 template <typename T> string to_str(const vector<T> &v) {
     std::stringstream ss;
@@ -196,7 +196,7 @@ struct Vec2 {
     };
 };
 
-string to_str(Vec2 v) { return "Vec2(" + to_str(v.x) + ", " + to_str(v.y) + ")"; }
+// string to_str(Vec2 v) { return "Vec2(" + to_str(v.x) + ", " + to_str(v.y) + ")"; }
 
 template <typename... Args> string spaced(const Args &...args) {
     std::stringstream ss;

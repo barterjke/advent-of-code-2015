@@ -1,4 +1,4 @@
-#!/bin/bash
+#!bash
 # flags="-fsanitize=undefined -fsanitize=bounds --std=c++20"
 flags="--std=c++20"
 arg=$1
