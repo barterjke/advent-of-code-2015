@@ -1,5 +1,4 @@
 #include "header.hpp"
-#include <numeric>
 
 int main() {
     auto lines = read_file_by_lines("input/day_19.txt");
