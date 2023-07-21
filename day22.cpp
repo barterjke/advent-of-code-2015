@@ -1,8 +1,5 @@
 #include "header.hpp"
-#include <cassert>
 #include <cmath>
-#include <cstdint>
-#include <ctime>
 #include <regex>
 
 vector<int> get_all_integers(const string &str) {
