@@ -1,55 +1,70 @@
 #include "header.hpp"
+#include <cassert>
 #include <functional>
+#include <limits>
 #include <numeric>
-#include <unordered_map>
-#include <unordered_set>
 
-const int TOTAL = 150;
-struct Num {
-    int x;
-    struct hash {
-        size_t operator()(const vector<Num> &nums) {
-            return std::accumulate(nums.begin(), nums.end(), 0, [](auto acc, auto num) {
-                return std::hash<int>()(acc) + std::hash<int>()(num.x);
-            });
+vector<int> append(vector<int> vec, int value) {
+    vec.push_back(value);
+    return vec;
+}
+
+int get_number_of_combinations_step(
+    const vector<int> &numbers, const size_t step, const int sum,
+    const int total, int &least_containers_used,
+    int &number_of_combinations_with_least_container_used,
+    const vector<int> combination) {
+    if (sum == total) {
+        if (combination.size() == least_containers_used)
+            number_of_combinations_with_least_container_used++;
+        if (combination.size() < least_containers_used) {
+            least_containers_used = combination.size();
+            number_of_combinations_with_least_container_used = 1;
         }
-    };
-};
-
-std::unordered_set<std::vector<Num()>>
-
-    void rec(vector<int> numbers, vector<int> result, int step = 0) {
-    if (step == numbers.size()) {
-        return;
+        return 1;
     }
-    for (int i = 0; i < numbers.size(); i++) {
+    int number_of_combinations = 0;
+    for (int i = step; i < numbers.size(); i++) {
         auto num = numbers[i];
-        if (num == 0) continue;
-        numbers[i]   = 0;
-        result[step] = num;
-        int sum      = std::accumulate(result.begin(), result.end(), 0);
-        if (sum == TOTAL) {
-            print(result);
-            continue;
-        } else if (sum > TOTAL) {
-            continue;
-        } else {
-            rec(numbers, result, step + 1);
-        }
-        numbers[i] = num;
+        if (sum + num <= total)
+            number_of_combinations += get_number_of_combinations_step(
+                numbers, i + 1, sum + num, total, least_containers_used,
+                number_of_combinations_with_least_container_used,
+                append(combination, num));
     }
+    return number_of_combinations;
+}
+
+std::pair<int, int>
+get_number_of_combinations_with_the_same_sum(const vector<int> &numbers,
+                                             int total) {
+
+    int least_containers_used = std::numeric_limits<int>::max();
+    int number_of_combinations_with_least_container_used = 0;
+    auto number_of_combinations = get_number_of_combinations_step(
+        numbers, 0, 0, total, least_containers_used,
+        number_of_combinations_with_least_container_used, {});
+    return {number_of_combinations,
+            number_of_combinations_with_least_container_used};
+}
+
+vector<int> get_sorted_input() {
+    auto str_numbers = read_file_by_lines("input/day_17.txt");
+    vector<int> numbers;
+    numbers.reserve(str_numbers.size());
+    std::ranges::for_each(str_numbers,
+                          [&numbers](auto x) { numbers.push_back(stoi(x)); });
+    std::sort(numbers.begin(), numbers.end(), std::greater<int>());
+    return numbers;
 }
 
 int main() {
-    auto str_numbers = split(read_entire_file("input/day_17.txt"), "\n");
-    vector<int> numbers;
-    numbers.reserve(str_numbers.size());
-    std::ranges::for_each(str_numbers, [&numbers](auto x) { numbers.push_back(stoi(x)); });
-    print(numbers);
-    // print(get_combinations(numbers.size()));
-    // rec({20, 15, 10, 5, 5});
-    vector<int> result(20);
-    rec(numbers, result);
-    // print(result);
+    auto test_result =
+        get_number_of_combinations_with_the_same_sum({20, 15, 10, 5, 5}, 25);
+    assert(test_result.first == 4 && test_result.second == 3);
+    auto [first, second] =
+        get_number_of_combinations_with_the_same_sum(get_sorted_input(), 150);
+    print("Part 1 answer is", first);
+    print("Part 2 answer is", second);
     return 0;
 }
